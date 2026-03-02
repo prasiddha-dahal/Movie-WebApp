@@ -1,11 +1,13 @@
+import Navbar from "./components/Navbar"
+import { ThemeProvider } from "./context/ThemeContext"
+
 function App() {
 
   return (
     <>
-
-                <div className="text-red-900 text-6xl">
-                hello 
-            </div>
+            <ThemeProvider>
+                <Navbar />
+            </ThemeProvider>
    </>
   )
 }
