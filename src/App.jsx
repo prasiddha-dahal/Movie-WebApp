@@ -7,23 +7,22 @@ import MovieDetails from "./pages/MovieDetails"
 function App() {
     const [movies , setMovies] = useState([]);
     const [query, setQuery] = useState("");
+    const [page, setPage] = useState(1);
 
     const API_KEY = import.meta.env.VITE_TMDB_KEY;
 
     useEffect(()=>{
-        fetchPopularMovies();
-    },[]);
-
-    useEffect(()=>{
         if(query){
-            fetchSearchMovies(query);
+            fetchSearchMovies(query, page);
+        }else{
+            fetchPopularMovies(page);
         }
-    },[query]);
+    },[query,page])
 
-    const fetchPopularMovies = async() => {
+    const fetchPopularMovies = async(pageNumber = 1) => {
         try{
         const res = await fetch(
-            `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`
+            `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&page=${pageNumber}`
         );
         const data = await res.json();
         console.log(data.results);
@@ -34,10 +33,10 @@ function App() {
         }
     };
 
-    const fetchSearchMovies = async(searchTerm) => {
+    const fetchSearchMovies = async(searchTerm, pageNumber = 1) => {
         try{
         const res = await fetch(
-            `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${searchTerm}`
+            `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${searchTerm}&page=${pageNumber}`
         );
         const data = await res.json();
         setMovies(data.results);
@@ -50,7 +49,7 @@ function App() {
         <div className="flex flex-col min-h-screen">
             <Navbar onSearch={setQuery} />
             <Routes>
-                <Route path="/" element={<Homepage movies={movies} />} />
+                <Route path="/" element={<Homepage movies={movies} page={page} setPage={setPage} />} />
                 <Route path="/movie/:id" element={<MovieDetails />} />
             </Routes>
         </div>
