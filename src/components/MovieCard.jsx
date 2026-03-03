@@ -2,7 +2,7 @@ const MovieCard = ({movie}) => {
     return (
         <div className="bg-white dark:bg-slate-700 rounded-lg shadow-md overflow-hidden transition-colors duration-500 hover:scale-100">
            <img 
-                src={movie.poster}
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                 alt={movie.title} 
                 className="w-full h-64 object-cover"
                 />  
@@ -11,7 +11,7 @@ const MovieCard = ({movie}) => {
                     {movie.title}
                 </p>
                 <p className="text-slate-500 dark:text-slate-200">
-                    {movie.rating || "N/A"}</p>
+                    {movie.vote_average || "N/A"}</p>
             </div>
         </div>
     )

@@ -4,24 +4,29 @@ import ThemeToggle from "./ThemeToggle";
 const Navbar = ({ onSearch }) => {
     const [input, Setinput] = useState("");
 
-    const handleChange = (e) => {
-        const value = e.target.value;
-        Setinput(value);
-        onSearch(value);
-    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        onSearch(input);
+    };
 
     return (
         <nav className="flex justify-between items-center p-6 bg-slate-300 dark:bg-slate-900">
             <h1 className="text-2xl font-bold dark:text-white">MovieApp</h1>
-            <input type="text"
+            <form className="flex w-1/3" onSubmit={handleSubmit}>
+                <input
+                    type="text"
                     placeholder="Search Movies..."
                     value={input}
-                    onChange={handleChange}
-                    className="rounded-xl px-4 py-2 w-1/3 bg-white outline-none text-slate-900 dark:bg-slate-700 dark:text-white"
-            />
+                    onChange={(e) => Setinput(e.target.value)}
+                    className="rounded-xl px-4 py-2 w-full bg-white outline-none text-slate-900 dark:bg-slate-700 dark:text-white"
+                />
+                <button className="ml-2 border border-black dark:border-white dark:text-white px-4 rounded" type="submit">
+                    Search
+                </button>
+            </form>
             <ThemeToggle />
         </nav>
-    )
+    );
 }
 
 export default Navbar 
