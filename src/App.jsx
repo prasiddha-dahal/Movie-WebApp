@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
+import { Routes, Route } from "react-router-dom"
 import Navbar from "./components/Navbar"
 import Homepage from "./pages/Homepage"
+import MovieDetails from "./pages/MovieDetails"
 
 function App() {
     const [movies , setMovies] = useState([]);
@@ -47,7 +49,10 @@ function App() {
     return (
         <div className="flex flex-col min-h-screen">
             <Navbar onSearch={setQuery} />
-            <Homepage movies={movies} />
+            <Routes>
+                <Route path="/" element={<Homepage movies={movies} />} />
+                <Route path="/movie/:id" element={<MovieDetails />} />
+            </Routes>
         </div>
     )
 }

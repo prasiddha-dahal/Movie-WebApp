@@ -20,7 +20,7 @@ const Navbar = ({ onSearch }) => {
                     onChange={(e) => Setinput(e.target.value)}
                     className="rounded-xl px-4 py-2 w-full bg-white outline-none text-slate-900 dark:bg-slate-700 dark:text-white"
                 />
-                <button className="ml-2 border border-black dark:border-white dark:text-white px-4 rounded" type="submit">
+                <button className="ml-2 bg-slate-400 dark:border-white dark:text-white px-4 rounded hover:bg-slate-500" type="submit">
                     Search
                 </button>
             </form>
