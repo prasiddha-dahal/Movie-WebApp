@@ -1,12 +1,6 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const MovieCard = ({ movie }) => {
-
-    const navigate = useNavigate();
-
-    const handlePlayTrailer = () => {
-        navigate(`/movie/${movie.id}`);
-    };
 
     return (
         <div className="bg-white dark:bg-slate-700 rounded-lg shadow-md overflow-hidden transition-colors duration-300 hover:scale-100">
@@ -25,12 +19,11 @@ const MovieCard = ({ movie }) => {
             </div>
 
             <div className="flex justify-center">
-                <button
-                    onClick={handlePlayTrailer}
-                    className="  p-3 rounded-xl text-white bg-slate-500 hover:bg-slate-600 m-3 dark:bg-slate-900 dark:hover:bg-slate-800 "
-                >
-                    Play Trailor
-                </button>
+                <Link to = {`/movie/${movie.id}`}
+                        className = "p-3 rounded-xl text-white bg-slate-500 hover:bg-slate-600 m-3 dark:bg-slate-900 dark:hover:bg-slate-800"
+                    >
+                    Play Trailer
+                </Link>
             </div>
         </div>
     );

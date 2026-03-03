@@ -1,5 +1,6 @@
 import { useState } from "react"
 import ThemeToggle from "./ThemeToggle";
+import { Link } from "react-router-dom";
 
 const Navbar = ({ onSearch }) => {
     const [input, Setinput] = useState("");
@@ -11,7 +12,9 @@ const Navbar = ({ onSearch }) => {
 
     return (
         <nav className="flex justify-between items-center p-6 bg-slate-300 dark:bg-slate-900">
-            <h1 className="text-2xl font-bold dark:text-white">MovieApp</h1>
+            <Link to="/" className="text-2xl font-bold dark:text-white">
+                MOVIEapp
+            </Link>
             <form className="flex w-1/3" onSubmit={handleSubmit}>
                 <input
                     type="text"
