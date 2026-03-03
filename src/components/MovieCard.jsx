@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const MovieCard = ({ movie }) => {
 
     return (
-        <div className="bg-white dark:bg-slate-700 rounded-lg shadow-md overflow-hidden transition-colors duration-300 hover:scale-100">
+        <div className="bg-white dark:bg-slate-700 cursor-pointer rounded-lg shadow-md overflow-hidden transition-colors duration-300 hover:scale-105 ">
             <img
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                 alt={movie.title}
