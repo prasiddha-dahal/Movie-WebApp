@@ -11,8 +11,7 @@ const MovieCard = ({movie}) => {
                     {movie.title}
                 </p>
                 <p className="text-slate-500 dark:text-slate-200">
-                    {movie.rating || "N/A"}
-                </p>
+                    {movie.rating || "N/A"}</p>
             </div>
         </div>
     )
