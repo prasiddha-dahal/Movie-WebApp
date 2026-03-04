@@ -22,7 +22,7 @@ const MovieCard = ({ movie }) => {
                 <Link to = {`/movie/${movie.id}`}
                         className = "p-3 rounded-xl text-white bg-slate-500 hover:bg-slate-600 m-3 dark:bg-slate-900 dark:hover:bg-slate-800"
                     >
-                    Play Trailer
+                    Watch
                 </Link>
             </div>
         </div>

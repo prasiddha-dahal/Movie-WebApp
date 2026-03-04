@@ -17,6 +17,7 @@ function App() {
         }else{
             fetchPopularMovies(page);
         }
+          window.scrollTo({ top: 0, behavior: "smooth" });
     },[query,page])
 
     const fetchPopularMovies = async(pageNumber = 1) => {
@@ -25,7 +26,7 @@ function App() {
             `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&page=${pageNumber}`
         );
         const data = await res.json();
-        console.log(data.results);
+        console.log(data);
         
         setMovies(data.results);
         }catch(err){

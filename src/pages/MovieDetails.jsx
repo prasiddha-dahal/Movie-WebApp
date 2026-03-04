@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 const MovieDetails = () => {
+    const [movieDetail, setMovieDetail] = useState(null);
     const { id } = useParams(); // Get movie ID from URL
     const navigate = useNavigate();
     const [trailerKey, setTrailerKey] = useState("");
@@ -9,16 +10,22 @@ const MovieDetails = () => {
     const API_KEY = import.meta.env.VITE_TMDB_KEY;
 
     useEffect(() => {
-        const fetchTrailer = async () => {
+
+        const fetchMovieData = async () => {
             try {
-                const res = await fetch(
+                const detailResponse = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`);
+                const detailData = await detailResponse.json();
+                console.log("movie data:", detailData);
+                setMovieDetail(detailData)
+
+                const videoResponse = await fetch(
                     `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}`
                 );
-                const data = await res.json();
-                console.log("Video data:", data);
+                const videoData = await videoResponse.json();
+                console.log("Video data:", videoData);
 
                 // Find YouTube trailer
-                const trailer = data.results.find(
+                const trailer = videoData.results.find(
                     (v) => v.type === "Trailer" && v.site === "YouTube"
                 );
 
@@ -26,13 +33,13 @@ const MovieDetails = () => {
                     setTrailerKey(trailer.key);
                 }
             } catch (err) {
-                console.log("Error fetching trailer:", err);
+                console.log("Error fetching movie data:", err);
             } finally {
                 setLoading(false);
             }
         };
 
-        fetchTrailer();
+        fetchMovieData();
     }, [id]);
 
     return (
@@ -43,6 +50,17 @@ const MovieDetails = () => {
             >
                 Back
             </button>
+
+            {movieDetail && (
+                <div className="flex flex-col gap-5 dark:text-white w-1/2 border-t-4 border-t-red-800 border-b-4 border-b-red-800 m-6">
+                    <p className="text-4xl font-extrabold shadow-black text-center ">{movieDetail.title}</p>
+                    <p>{movieDetail.overview}</p>
+                    <p className="font-semibold">Release Date: {movieDetail.release_date}</p>
+                    <p className="font-semibold mb"> Rating : <span className="text-yellow-800 dark:text-yellow-500">
+                        {movieDetail.vote_average}
+                    </span></p>
+                </div>
+            )}
 
             {loading && (<>
                 <div className="w-16 h-16 rounded-full border-4 border-white border-t-transparent animate-spin">
