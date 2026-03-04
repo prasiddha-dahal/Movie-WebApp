@@ -12,7 +12,7 @@ const Navbar = ({ onSearch }) => {
 
     return (
         <nav className="flex justify-between items-center p-6 bg-slate-300 dark:bg-slate-900">
-            <Link to="/" className="text-2xl font-bold dark:text-white">
+            <Link to="/" className="text-2xl font-bold dark:text-white tracking-widest">
                 FILMhera
             </Link>
             <form className="flex w-1/3" onSubmit={handleSubmit}>
